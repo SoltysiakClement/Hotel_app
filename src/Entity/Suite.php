@@ -37,7 +37,7 @@ class Suite
 
     #[ORM\ManyToOne(inversedBy: 'suites')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?etablissement $etablissement = null;
+    private ?Etablissement $etablissement = null;
 
     public function getId(): ?int
     {

@@ -5,8 +5,11 @@
 {% block body %}
 
 <div class="flex">
-
-   <div class="card"> </div>
-   
+{% for etablissement in etablissements %}
+   <div class="card"> 
+   {{etablissement.nom}}
+    <a href="{{path('etablissement_details',{id: etablissement.id})}}" >
+   </div>
+   {% endfor  %}
 </div>
 {% endblock %}

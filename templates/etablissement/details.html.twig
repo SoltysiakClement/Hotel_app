@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails pour l'etablissement {{etablissement.id}}{% endblock %}
+
+{% block body %}
+<h1>{{etablissement.nom}}</h1>
+<div class="flex">
+
+ <div class="">
+ <span>{{etablissement.nom}}</span>
+ <span>{{etablissement.ville}}</span>
+ <span>{{etablissement.adresse}}</span>
+  <span>{{etablissement.description}}</span>
+ </div>
+<a href="" >Voir nos suites</a>
+ 
+  
+  {% for suites in etablissement %} 
+  <div class="card">
+ <span>{{suites.nom}}</span>
+ <span>{{suites.image_A}}</span> 
+ <span>{{suites.description}}</span>
+  <span>{{suites.prix}}</span>
+   <span>{{suites.statut}}</span>
+
+ </div>
+  {% endfor %}
+</div>
+{% endblock %}
