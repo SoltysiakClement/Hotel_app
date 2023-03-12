@@ -20,4 +20,16 @@ class SuiteController extends AbstractController
             'suites' => $suites
         ]);
     }
+
+    #[Route('/suite/{id}', name: 'suite_details')]
+    public function single(ManagerRegistry $doctrine, int $id): Response
+    {
+        $suiteRepository = $doctrine->getRepository(Suite::class);
+        $suite = $suiteRepository->find($id);
+
+        return $this->render('suite/details.html.twig', [
+            'controller_name' => 'SuiteController',
+            'suite' => $suite
+        ]);
+    }
 }

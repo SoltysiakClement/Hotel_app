@@ -3,27 +3,28 @@
 {% block title %}Détails pour l'etablissement {{etablissement.id}}{% endblock %}
 
 {% block body %}
+
 <h1>{{etablissement.nom}}</h1>
 <div class="flex">
 
- <div class="">
+ <div class="info_element">
  <span>{{etablissement.nom}}</span>
  <span>{{etablissement.ville}}</span>
  <span>{{etablissement.adresse}}</span>
   <span>{{etablissement.description}}</span>
  </div>
-<a href="" >Voir nos suites</a>
  
   
-  {% for suites in etablissement %} 
+  {% for suite in etablissement.suites|slice(0, 3) %} 
   <div class="card">
- <span>{{suites.nom}}</span>
- <span>{{suites.image_A}}</span> 
- <span>{{suites.description}}</span>
-  <span>{{suites.prix}}</span>
-   <span>{{suites.statut}}</span>
+ <span>{{suite.titre}}</span>
+ <span>{{suite.imageA}}</span> 
+ <span>{{suite.description}}</span>
+  <span>{{suite.prix}}</span>
+   <span>{{suite.statut}}</span>
 
  </div>
   {% endfor %}
+  <a href="{{ path('app_suite', {'id': etablissement.id}) }}">Voir plus de suites</a>
 </div>
 {% endblock %}

@@ -31,6 +31,9 @@ class Etablissement
     #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: Suite::class, orphanRemoval: true)]
     private Collection $suites;
 
+    #[ORM\ManyToOne(inversedBy: 'suite')]
+    private ?Suite $suite = null;
+
     public function __construct()
     {
         $this->suites = new ArrayCollection();
@@ -115,6 +118,18 @@ class Etablissement
                 $suite->setEtablissement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSuite(): ?Suite
+    {
+        return $this->suite;
+    }
+
+    public function setSuite(?Suite $suite): self
+    {
+        $this->suite = $suite;
 
         return $this;
     }

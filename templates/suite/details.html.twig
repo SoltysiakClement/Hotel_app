@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails pour la suite {{suite.titre}}{% endblock %}
+
+{% block body %}
+
+<h1>{{suite.titre}}</h1>
+<div class="flex">
+
+ <div class="">
+ <span>{{suite.titre}}</span>
+ <span>{{suite.description}}</span>
+ <span>{{suite.prix}}€</span>
+  <span>{{suite.statut}}</span>
+ </div>
+</div>
+{% endblock %}
+
+

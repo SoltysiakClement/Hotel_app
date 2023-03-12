@@ -7,8 +7,7 @@
 <div class="flex">
 {% for etablissement in etablissements %}
    <div class="card"> 
-   {{etablissement.nom}}
-    <a href="{{path('etablissement_details',{id: etablissement.id})}}" >
+    <a href="{{path('etablissement_details',{id: etablissement.id})}}">{{ etablissement.nom }}</a>
    </div>
    {% endfor  %}
 </div>

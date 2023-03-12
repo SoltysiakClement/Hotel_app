@@ -7,7 +7,7 @@
 <div class="flex">
 {% for suite in suites %}
    <div class="card"> 
-   {{suite.nom}}
+     <a href="{{path('suite_details',{id: suite.id})}}">{{ suite.titre }}</a>
    </div>
    {% endfor  %}
 </div>

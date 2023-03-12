@@ -1,11 +1,29 @@
-.card{
-    padding: 2vw;
-    width: 10vw;
-    border: 1px solid;
-    border-radius: 5px;
-    text-align: center;
-    margin-right: 2vw;
+.card {
+  padding: 2vw;
+  width: 10vw;
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 2vw;
 }
-.flex{
-    display: flex;
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: darksalmon;
+  padding: 15px;
+}
+.info_element {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
 }
