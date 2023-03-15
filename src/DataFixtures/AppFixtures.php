@@ -7,10 +7,15 @@ use App\Entity\Suite;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordHasherInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasherInterface)
+    {
+        $this->userPasswordHasherInterface = $userPasswordHasherInterface;
+    }
 
 
     private function generateName(): string
@@ -62,7 +67,8 @@ class AppFixtures extends Fixture
         $admin = new User();
         $admin->setEmail('fumetsuhanta@hotmail.fr');
         $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword('password');
+        $admin->setPassword($this->userPasswordHasherInterface->hashPassword($admin, '280398'));
+
         $manager->persist($admin);
 
         $manager->flush();

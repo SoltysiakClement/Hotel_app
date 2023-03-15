@@ -181,4 +181,9 @@ class Suite
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->titre;
+    }
 }

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use App\Form\ReservationType;
+
 class SuiteController extends AbstractController
 {
     #[Route('/suite', name: 'app_suite')]
@@ -24,25 +26,14 @@ class SuiteController extends AbstractController
     }
 
     #[Route('/suite/{id}', name: 'suite_details')]
-    public function single(ManagerRegistry $doctrine, int $id): Response
+    public function single(Request $request, ManagerRegistry $doctrine, int $id): Response
     {
         $suiteRepository = $doctrine->getRepository(Suite::class);
         $suite = $suiteRepository->find($id);
 
-        return $this->render('suite/details.html.twig', [
-            'controller_name' => 'SuiteController',
-            'suite' => $suite
-        ]);
-    }
-
-
-    // tentative mais j'y crois pas trop
-    #[Route('/suite/{id}/reservation', name: 'app_reservation_add')]
-    public function add(Request $request, ManagerRegistry $doctrine): Response
-    {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation, [
-            'available_suites' => $doctrine->getRepository(Suite::class)->findAvailableSuites()
+            // 'available_suites' => $doctrine->getRepository(Suite::class)->findAvailableSuites()
         ]);
 
         $form->handleRequest($request);
@@ -66,6 +57,8 @@ class SuiteController extends AbstractController
         }
 
         return $this->render('suite/details.html.twig', [
+            'controller_name' => 'SuiteController',
+            'suite' => $suite,
             'form' => $form
         ]);
     }
