@@ -34,6 +34,11 @@ class Etablissement
     #[ORM\ManyToOne(inversedBy: 'suite')]
     private ?Suite $suite = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(name: 'gerant_id', referencedColumnName: 'id', nullable: true)]
+    private ?User $gerant = null;
+
+
     public function __construct()
     {
         $this->suites = new ArrayCollection();
@@ -130,6 +135,18 @@ class Etablissement
     public function setSuite(?Suite $suite): self
     {
         $this->suite = $suite;
+
+        return $this;
+    }
+
+    public function getGerant(): ?User
+    {
+        return $this->gerant;
+    }
+
+    public function setGerant(?User $gerant): self
+    {
+        $this->gerant = $gerant;
 
         return $this;
     }

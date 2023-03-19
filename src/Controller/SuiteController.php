@@ -36,6 +36,7 @@ class SuiteController extends AbstractController
             // 'available_suites' => $doctrine->getRepository(Suite::class)->findAvailableSuites()
         ]);
 
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -47,7 +48,7 @@ class SuiteController extends AbstractController
 
             $dateDebut = $form->get('DateDebut')->getData();
             $dateFin = $form->get('DateFin')->getData();
-            $prix = $selectedSuite->getPrixParNuit() * $dateDebut->diff($dateFin)->days;
+            $prix = $selectedSuite->getPrixTotal();
             $reservation->setPrix($prix);
 
             $entityManager->persist($reservation);
@@ -61,5 +62,11 @@ class SuiteController extends AbstractController
             'suite' => $suite,
             'form' => $form
         ]);
+    }
+
+    #[Route('/reservation/success', name: 'app_reservation_success')]
+    public function reservationSuccess(): Response
+    {
+        return $this->render('reservation/success.html.twig');
     }
 }

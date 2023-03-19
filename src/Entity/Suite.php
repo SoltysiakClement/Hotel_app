@@ -181,6 +181,25 @@ class Suite
 
         return $this;
     }
+    public function getPrixTotal(): float
+    {
+        $prix = $this->getPrix();
+
+        $debutReservation = $this->getDebutReservation();
+        $finReservation = $this->getFinReservation();
+        if (!$debutReservation || !$finReservation) {
+            return 0.0;
+        }
+
+        $duree = $finReservation->diff($debutReservation)->days;
+        return round($prix * $duree, 2);
+    }
+
+
+
+
+
+
 
     public function __toString()
     {

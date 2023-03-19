@@ -39,29 +39,32 @@ class AppFixtures extends Fixture
             $etablissement->setDescription("Description de l'établissement $i");
             $etablissement->setVille($city);
             $etablissement->setAdresse("Adresse de l'établissement $i");
-            $manager->persist($etablissement);
 
-            // Créer 20 suites pour chaque établissement
-            for ($j = 1; $j <= 20; $j++) {
-                $adjective = $this->generateName(); // ajout de la variable $adjective dans la boucle for
-                $suite = new Suite();
-                $suite->setTitre("Suite $adjective $j de l'établissement " . $etablissement->getNom());
-                $suite->setDescription("Description de la suite $j de l'établissement $i");
-                $suite->setPrix(100 + ($j % 5) * 50); // prix varie entre 100 et 250 euros
-                $suite->setEtablissement($etablissement);
-                $suite->setImageA('https://picsum.photos/200/300');
-                $suite->setStatut('libre');
-                $manager->persist($suite);
-            }
 
-            // Créer un gérant pour chaque établissement
+
             $gerant = new User();
             $gerant->setEmail("gerant$i@example.com");
             $gerant->setRoles(['ROLE_GERANT']);
-            $gerant->setPassword('password');
+            $gerant->setPassword($this->userPasswordHasherInterface->hashPassword($gerant, 'gerant'));
 
-            $manager->persist($gerant);
+            $etablissement->setGerant($gerant);
+            $manager->persist($etablissement);
         }
+
+        // Créer 20 suites pour chaque établissement
+        for ($j = 1; $j <= 20; $j++) {
+            $adjective = $this->generateName(); // ajout de la variable $adjective dans la boucle for
+            $suite = new Suite();
+            $suite->setTitre("Suite $adjective $j de l'établissement " . $etablissement->getNom());
+            $suite->setDescription("Description de la suite $j de l'établissement $i");
+            $suite->setPrix(100 + ($j % 5) * 50); // prix varie entre 100 et 250 euros
+            $suite->setEtablissement($etablissement);
+            $suite->setImageA('https://picsum.photos/200/300');
+            $suite->setStatut('libre');
+            $manager->persist($suite);
+        }
+
+
 
         // Créer l'utilisateur de rôle "admin"
         $admin = new User();
